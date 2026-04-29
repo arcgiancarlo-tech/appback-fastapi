@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    container_name: spinaisql-app
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://postgres:422Fleming422Fleming422@db:5432/mydb
+    ports:
+      - "8000:8000"
+  db:
+    image: postgres:15
+    container_name: spinaisql-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 422Fleming422Fleming422
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:
